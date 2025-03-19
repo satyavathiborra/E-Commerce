@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        header nav {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            margin: 0;
+        }
+
+        header nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        header nav ul li a:hover {
+            color: #77BFA3;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 2px solid #f4f4f4;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        .account-info, .account-actions {
+            margin: 20px 0;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #5cb85c;
+        }
+
+        p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .account-actions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .account-actions ul li {
+            padding: 10px 15px;
+            border: 1px solid #f4f4f4;
+            border-radius: 5px;
+            margin: 10px 0;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        .account-actions ul li:hover {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .edit-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #f0ad4e;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .edit-button:hover {
+            background-color: #ec971f;
+        }
+
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logout button {
+            padding: 10px 20px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .logout button:hover {
+            background-color: #c9302c;
+        }
+               /* Footer Styles */
+footer {
+    background: #121212; /* Dark background */
+    color: #fff; /* Light text */
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+}
+
+footer .col {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+footer .logo {
+    margin-bottom: 20px;
+}
+
+footer h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+footer h4::after {
+    content: '';
+    width: 50px;
+    height: 2px;
+    background: white;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+}
+
+footer p, footer a {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 5px 0;
+    color: white; /* White text */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffd700; /* Gold color on hover */
+}
+
+footer .follow {
+    margin-top: 15px;
+}
+
+footer .follow h4 {
+    margin-bottom: 10px;
+}
+
+footer .follow .icon i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: white;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+footer .follow .icon i:hover {
+    color: #ffd700; /* Gold color on hover */
+    transform: scale(1.2);
+}
+
+footer .install img {
+    width: 120px;
+    margin: 10px 5px 20px 0;
+    border: 1px solid white;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+footer .install img:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+footer .copyright {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: 20px;
+    color: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer .col {
+        margin-bottom: 20px;
+        min-width: 100%;
+    }
+
+    footer .follow .icon i {
+        font-size: 20px;
+        margin-right: 5px;
+    }
+
+    footer .install img {
+        width: 100px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+
+
+    
+    <div class="container">
+        <!-- Account Header -->
+        <div class="header">
+            <h1>User Account</h1>
+        </div>
+
+        <!-- Account Information -->
+        <div class="account-info">
+            <h2>Account Details</h2>
+            <p><strong>First Name:</strong> satyavathi</p>
+            <p><strong>Last Name:</strong> borra</p>
+            <p><strong>Email:</strong> 2300030098@kluniversity.in</p>
+            <p><strong>Phone Number:</strong> 6300581179</p>
+            <p><strong>Address:</strong> green fields vaddeswaram vijayawada</p>
+            <p><strong>City:</strong> vaddeswaram</p>
+            <p><strong>State:</strong> andhra pradesh</p>
+            <p><strong>Zip Code:</strong> 62701</p>
+            <p><strong>Country:</strong> India</p>
+           
+        </div>
+
+      
+    
+    
+    
+    
+</body>
+</html>

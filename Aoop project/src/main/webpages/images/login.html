@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - eShop</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #2f3131, #2f3131); /* Gradient background */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Deep shadow for a modern effect */
+            width: 350px; /* Increased width for more space */
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-size: 26px; /* Larger font for heading */
+            color: #333;
+            font-weight: 600; /* Bold for emphasis */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px; /* Rounder corners */
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #77BFA3; /* Color transition on focus */
+            outline: none;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align checkbox left */
+            margin-bottom: 15px;
+        }
+
+        .remember-me input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #77BFA3;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px; /* Larger font for the button */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #66a693;
+            transform: translateY(-3px); /* Slight upward effect */
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .forgot-password {
+            margin-top: 15px;
+        }
+
+        .forgot-password a {
+            color: #77BFA3;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .register-option {
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        .register-option a {
+            color: #77BFA3;
+            text-decoration: none;
+            font-weight: bold; /* Emphasize register link */
+        }
+
+        .register-option a:hover {
+            text-decoration: underline;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .social-login button {
+            width: 48%;
+            padding: 12px;
+            background-color: #4285F4; /* Google color */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .social-login .facebook {
+            background-color: #3b5998; /* Facebook color */
+        }
+
+        .show-password {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .show-password input {
+            margin-right: 6px;
+        }
+
+        /* Error message */
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const username = document.forms["loginForm"]["username"].value;
+            const password = document.forms["loginForm"]["password"].value;
+            const errorMessage = document.getElementById("error-message");
+
+            // Clear previous error message
+            errorMessage.style.display = "none";
+            errorMessage.innerHTML = "";
+
+            // Username validation
+            const usernamePattern = /^[a-zA-Z0-9]+$/; // Alphanumeric characters only
+            if (!username) {
+                errorMessage.style.display = "block";
+                errorMessage.innerHTML = "Username is required.";
+                return false;
+            } else if (!usernamePattern.test(username)) {
+                errorMessage.style.display = "block";
+                errorMessage.innerHTML = "Username must be alphanumeric.";
+                return false;
+            }
+
+            // Password validation
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // At least 8 chars, one uppercase, one lowercase, one digit, one special char
+            if (!password) {
+                errorMessage.style.display = "block";
+                errorMessage.innerHTML = "Password is required.";
+                return false;
+            } else if (!passwordPattern.test(password)) {
+                errorMessage.style.display = "block";
+                errorMessage.innerHTML = "Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, one digit, and one special character.";
+                return false;
+            }
+
+            return true;
+        }
+
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById("password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form name="loginForm" action="login_handler.php" method="POST" onsubmit="return validateForm()">
+            <div id="error-message" class="error-message"></div> <!-- Error message display -->
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+
+            <div class="show-password">
+                <input type="checkbox" onclick="togglePasswordVisibility()"> Show Password
+            </div>
+            
+            <div class="remember-me">
+                <input type="checkbox" name="remember" id="remember">
+                <label for="remember">Remember Me</label>
+            </div>
+            
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="forgot-password">
+            <p><a href="reset_password.html">Forgot Password?</a></p>
+        </div>
+
+        <!-- Register Option -->
+        <div class="register-option">
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+
+        <!-- Social Login Buttons -->
+        <div class="social-login">
+            <!-- <button class="google">Login with Google</button>
+            <button class="facebook">Login with Facebook</button> -->
+        </div>
+    </div>
+
+</body>
+</html>

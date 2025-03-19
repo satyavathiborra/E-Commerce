@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - eShop</title>
+    <style>
+        /* General styles for body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #2f3131,#2f3131);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Container for the registration form */
+        .register-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Container hover effect for slight lift */
+        .register-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Form title */
+        h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Input fields styling */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Input focus effect */
+        input:focus {
+            border-color: #77BFA3;
+            box-shadow: 0 0 8px rgba(119, 191, 163, 0.3);
+            outline: none;
+        }
+
+        /* Button styles */
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #77BFA3;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Button hover and active states */
+        button:hover {
+            background-color: #66a693;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+            display: none;
+            font-size: 14px;
+        }
+
+        /* Show password section styling */
+        .show-password {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .show-password input {
+            margin-right: 8px;
+        }
+
+        /* Terms and conditions checkbox styling */
+        .terms {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .terms input {
+            margin-right: 10px;
+        }
+
+        /* Link for terms and conditions */
+        .terms a {
+            color: #77BFA3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        /* Login option styling */
+        .login-option {
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        .login-option a {
+            color: #77BFA3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-option a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social login button styling */
+        .social-login {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .social-login button {
+            width: 48%;
+            padding: 12px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Facebook button */
+        .social-login .facebook {
+            background-color: #3b5998;
+        }
+
+        /* Hover effects for social buttons */
+        .social-login button:hover {
+            background-color: #357ae8; /* Google hover */
+        }
+
+        .social-login .facebook:hover {
+            background-color: #2d4373;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const username = document.forms["registerForm"]["username"].value;
+            const email = document.forms["registerForm"]["email"].value;
+            const password = document.forms["registerForm"]["password"].value;
+            const confirmPassword = document.forms["registerForm"]["confirm_password"].value;
+            const errorMessage = document.getElementById("error-message");
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Email regex pattern
+            const usernamePattern = /^[a-zA-Z0-9_]{3,20}$/; // Username regex pattern
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/; // Password strength pattern
+
+            if (!usernamePattern.test(username)) {
+                errorMessage.style.display = "block";
+                errorMessage.innerHTML = "Username must be 3-20 characters long and can only contain letters, numbers, and underscores.";
+                return false;
+            }
+
+            if (!emailPattern.test(email)) {
+                errorMessage.style.display = "block";
+                errorMessage.innerHTML = "Please enter a valid email address.";
+                return false;
+            }
+
+            if (!passwordPattern.test(password)) {
+                errorMessage.style.display = "block";
+                errorMessage.innerHTML = "Password must be at least 6 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.style.display = "block";
+                errorMessage.innerHTML = "Passwords do not match.";
+                return false;
+            }
+
+            const termsAccepted = document.forms["registerForm"]["terms"].checked;
+            if (!termsAccepted) {
+                errorMessage.style.display = "block";
+                errorMessage.innerHTML = "You must accept the terms and conditions.";
+                return false;
+            }
+
+            errorMessage.style.display = "none";
+            return true;
+        }
+
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById("password");
+            const confirmPasswordField = document.getElementById("confirm_password");
+            if (passwordField.type === "password" || confirmPasswordField.type === "password") {
+                passwordField.type = "text";
+                confirmPasswordField.type = "text";
+            } else {
+                passwordField.type = "password";
+                confirmPasswordField.type = "password";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2>Register</h2>
+        <form name="registerForm" action="register_handler.php" method="POST" onsubmit="return validateForm()">
+            <div id="error-message" class="error-message"></div>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+
+            <div class="show-password">
+                <input type="checkbox" onclick="togglePasswordVisibility()"> Show Password
+            </div>
+
+            <div class="terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Login Option -->
+        <div class="login-option">
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+
+        <!-- Social Login Buttons -->
+        <div class="social-login">
+            <button class="google">Register with Google</button>
+            <button class="facebook">Register with Facebook</button>
+        </div>
+    </div>
+
+</body>
+</html>
